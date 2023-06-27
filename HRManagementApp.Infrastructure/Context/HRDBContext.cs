@@ -24,6 +24,7 @@ namespace HRManagementApp.Infrastructure.Context
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<Package> Packages { get; set; }
         public DbSet<Shift> Shifts { get; set; }
+        public DbSet<Manager> Managers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
