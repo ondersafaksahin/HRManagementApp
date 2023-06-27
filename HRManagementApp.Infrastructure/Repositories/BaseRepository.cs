@@ -63,7 +63,15 @@ namespace HRManagementApp.Infrastructure.Repositories
 
         public async Task<int> Save()
         {
-            return await _database.SaveChangesAsync();
+            try
+            {
+                return await _database.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
     }
 }
