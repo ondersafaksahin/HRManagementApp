@@ -1,0 +1,17 @@
+﻿using HRManagementApp.Application.DTOs.AdminDTOs;
+using HRManagementApp.Application.DTOs.ExpenseDTOs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HRManagementApp.Application.Services.ExpenseService
+{
+    public interface IExpenseService
+    {
+        Task Create(ExpenseCreateDTO expenseCreateDTO);
+        Task Update(ExpenseUpdateDTO expenseUpdateDTO);
+        Task Delete(int id);
+    }
+}
