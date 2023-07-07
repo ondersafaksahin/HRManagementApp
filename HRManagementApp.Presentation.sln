@@ -10,6 +10,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRManagementApp.Presentatio
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRManagementApp.Application", "HRManagementApp.Application\HRManagementApp.Application.csproj", "{3528A06C-4F39-4E4C-A8E2-371B5E52C208}"
+	ProjectSection(ProjectDependencies) = postProject
+		{68E2C29A-49FB-4525-BA8B-20F6DD53CA0D} = {68E2C29A-49FB-4525-BA8B-20F6DD53CA0D}
+		{B6808D0A-F0E8-4A6B-B03E-81D796A0746F} = {B6808D0A-F0E8-4A6B-B03E-81D796A0746F}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRManagementApp.Domain", "HRManagementApp.Domain\HRManagementApp.Domain.csproj", "{68E2C29A-49FB-4525-BA8B-20F6DD53CA0D}"
 EndProject
