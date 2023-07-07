@@ -1,4 +1,5 @@
 ﻿using HRManagementApp.Domain.Entities.Abstract;
+using HRManagementApp.Domain.Enums;
 using HRManagementApp.Domain.IRepositories;
 using HRManagementApp.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +37,7 @@ namespace HRManagementApp.Infrastructure.Repositories
         {
             _database.Entry<T>(item).State = EntityState.Deleted;
             item.Status = Domain.Enums.Status.Deleted;
-            await Update(item);
+            await Save();
         }
 
         public async Task<List<T>> GetAll()
