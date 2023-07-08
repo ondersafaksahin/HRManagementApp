@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagementApp.Application.DTOs.ExpenseDTOs;
+using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -19,24 +20,24 @@ namespace HRManagementApp.Application.Services.ExpenseService
             _mapper = mapper;
         }
 
-        public Task Create(ExpenseCreateDTO expenseCreateDTO)
+        public async Task Create(ExpenseCreateDTO expenseCreateDTO)
         {
-            throw new NotImplementedException();
+            await _expenseRepository.Add(_mapper.Map<Expense>(expenseCreateDTO));
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _expenseRepository.Delete(await _expenseRepository.GetBy(x => x.ID == id));
         }
 
-        public Task<List<ExpenseListDTO>> List()
+        public async Task<List<ExpenseListDTO>> List()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<ExpenseListDTO>>(await _expenseRepository.GetAll());
         }
 
-        public Task Update(ExpenseUpdateDTO expenseUpdateDTO)
+        public async Task Update(ExpenseUpdateDTO expenseUpdateDTO)
         {
-            throw new NotImplementedException();
+            await _expenseRepository.Update(_mapper.Map<Expense>(expenseUpdateDTO));
         }
     }
 }

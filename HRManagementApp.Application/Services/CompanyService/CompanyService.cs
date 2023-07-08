@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagementApp.Application.DTOs.CompanyDTOs;
+using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -20,24 +21,24 @@ namespace HRManagementApp.Application.Services.CompanyService
             _mapper = mapper;
         }
 
-        public Task Create(CompanyCreateDTO companyCreateDTO)
+        public async Task Create(CompanyCreateDTO companyCreateDTO)
         {
-            throw new NotImplementedException();
+            await _companyRepository.Add(_mapper.Map<Company>(companyCreateDTO));
         }
 
-        public Task Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            await _companyRepository.Delete(await _companyRepository.GetBy(x => x.ID == id));
         }
 
-        public Task<List<CompanyListDTO>> List()
+        public async Task<List<CompanyListDTO>> List()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<CompanyListDTO>>(await _companyRepository.GetAll());
         }
 
-        public Task Update(CompanyUpdateDTO companyUpdateDTO)
+        public async Task Update(CompanyUpdateDTO companyUpdateDTO)
         {
-            throw new NotImplementedException();
+            await _companyRepository.Update(_mapper.Map<Company>(companyUpdateDTO));
         }
     }
 }

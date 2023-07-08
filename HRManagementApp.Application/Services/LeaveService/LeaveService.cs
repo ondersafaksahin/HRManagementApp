@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagementApp.Application.DTOs.LeaveDTOs;
+using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -20,24 +21,24 @@ namespace HRManagementApp.Application.Services.LeaveService
             _mapper = mapper;
         }
 
-        public Task Create(LeaveCreateDTO leaveCreateDTO)
+        public async Task Create(LeaveCreateDTO leaveCreateDTO)
         {
-            throw new NotImplementedException();
+            await _leaveRepository.Add(_mapper.Map<Leave>(leaveCreateDTO));
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _leaveRepository.Delete(await _leaveRepository.GetBy(x => x.ID == id));
         }
 
-        public Task<List<LeaveListDTO>> List()
+        public async Task<List<LeaveListDTO>> List()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<LeaveListDTO>>(await _leaveRepository.GetAll());
         }
 
-        public Task Update(LeaveUpdateDTO leaveUpdateDTO)
+        public async Task Update(LeaveUpdateDTO leaveUpdateDTO)
         {
-            throw new NotImplementedException();
+            await _leaveRepository.Update(_mapper.Map<Leave>(leaveUpdateDTO));
         }
     }
 }

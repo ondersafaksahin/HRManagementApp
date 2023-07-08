@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagementApp.Application.DTOs.ShiftDTOs;
+using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -19,24 +20,24 @@ namespace HRManagementApp.Application.Services.ShiftService
             _mapper = mapper;
         }
 
-        public Task Create(ShiftCreateDTO shiftCreateDTO)
+        public async Task Create(ShiftCreateDTO shiftCreateDTO)
         {
-            throw new NotImplementedException();
+            await _shiftRepository.Add(_mapper.Map<Shift>(shiftCreateDTO));
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _shiftRepository.Delete(await _shiftRepository.GetBy(x => x.ID == id));
         }
 
-        public Task<List<ShiftListDTO>> List()
+        public async Task<List<ShiftListDTO>> List()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<ShiftListDTO>>(await _shiftRepository.GetAll());
         }
 
-        public Task Update(ShiftUpdateDTO shiftUpdateDTO)
+        public async Task Update(ShiftUpdateDTO shiftUpdateDTO)
         {
-            throw new NotImplementedException();
+            await _shiftRepository.Update(_mapper.Map<Shift>(shiftUpdateDTO);
         }
     }
 }

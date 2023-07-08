@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using HRManagementApp.Application.DTOs.ManagerDTOs;
+using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,31 +15,33 @@ namespace HRManagementApp.Application.Services.ManagerService
     {
         IManagerRepository _managerRepository;
         IMapper _mapper;
+        UserManager<AppUser> _userManager;
 
-        public ManagerService(IManagerRepository managerRepository, IMapper mapper)
+        public ManagerService(IManagerRepository managerRepository, IMapper mapper,UserManager<AppUser> userManager)
         {
             _managerRepository = managerRepository;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
-        public Task Create(ManagerCreateDTO managerCreateDTO)
+        public async Task Create(ManagerCreateDTO managerCreateDTO)
         {
-            throw new NotImplementedException();
+            await _managerRepository.Add(_mapper.Map<Manager>(managerCreateDTO));
         }
 
-        public Task Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            await _managerRepository.Delete(await _managerRepository.GetBy(x => x.ID == id));
         }
 
-        public Task<List<ManagerListDTO>> List()
+        public async Task<List<ManagerListDTO>> List()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<ManagerListDTO>>(await _managerRepository.GetAll());
         }
 
-        public Task Update(ManagerUpdateDTO managerUpdateDTO)
+        public async Task Update(ManagerUpdateDTO managerUpdateDTO)
         {
-            throw new NotImplementedException();
+            await _managerRepository.Update(_mapper.Map<Manager>(managerUpdateDTO));
         }
     }
 }
