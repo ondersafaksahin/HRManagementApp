@@ -37,7 +37,7 @@ namespace HRManagementApp.Application.Services.ShiftService
 
         public async Task Update(ShiftUpdateDTO shiftUpdateDTO)
         {
-            await _shiftRepository.Update(_mapper.Map<Shift>(shiftUpdateDTO);
+            await _shiftRepository.Update(_mapper.Map<Shift>(shiftUpdateDTO));
         }
     }
 }
