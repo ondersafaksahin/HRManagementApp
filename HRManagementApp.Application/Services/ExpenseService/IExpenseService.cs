@@ -8,10 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Application.Services.ExpenseService
 {
-    public interface IExpenseService
+    public interface IExpenseService:IBaseService<ExpenseCreateDTO,ExpenseUpdateDTO,ExpenseListDTO,int>
     {
-        Task Create(ExpenseCreateDTO expenseCreateDTO);
-        Task Update(ExpenseUpdateDTO expenseUpdateDTO);
-        Task Delete(int id);
     }
 }

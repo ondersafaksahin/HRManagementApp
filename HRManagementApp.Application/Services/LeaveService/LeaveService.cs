@@ -30,6 +30,11 @@ namespace HRManagementApp.Application.Services.LeaveService
             throw new NotImplementedException();
         }
 
+        public Task<List<LeaveListDTO>> List()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Update(LeaveUpdateDTO leaveUpdateDTO)
         {
             throw new NotImplementedException();

@@ -29,6 +29,11 @@ namespace HRManagementApp.Application.Services.PackageService
             throw new NotImplementedException();
         }
 
+        public Task<List<PackageListDTO>> List()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Update(PackageUpdateDTO packageUpdateDTO)
         {
             throw new NotImplementedException();

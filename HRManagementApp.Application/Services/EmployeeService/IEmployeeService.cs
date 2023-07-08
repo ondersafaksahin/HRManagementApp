@@ -8,10 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Application.Services.EmployeeService
 {
-    public interface IEmployeeService
+    public interface IEmployeeService:IBaseService<EmployeeCreateDTO,EmployeeUpdateDTO,EmployeeListDTO,Guid>
     {
-        Task Create(EmployeeCreateDTO employeeCreateDTO);
-        Task Update(EmployeeUpdateDTO employeeUpdateDTO);
-        Task Delete(Guid id);
     }
 }

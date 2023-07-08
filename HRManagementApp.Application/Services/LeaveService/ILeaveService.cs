@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Application.Services.LeaveService
 {
-    public interface ILeaveService
+    public interface ILeaveService:IBaseService<LeaveCreateDTO,LeaveUpdateDTO,LeaveListDTO,int>
     {
-        Task Create(LeaveCreateDTO leaveCreateDTO);
-        Task Update(LeaveUpdateDTO leaveUpdateDTO);
-        Task Delete(int id);
+      
     }
 }

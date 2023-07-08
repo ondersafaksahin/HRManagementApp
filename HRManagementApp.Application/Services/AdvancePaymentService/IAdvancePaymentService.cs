@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Application.Services.AdvancePaymentService
 {
-    public interface IAdvancePaymentService
+    public interface IAdvancePaymentService:IBaseService<AdvancePaymentCreateDTO, AdvancePaymentUpdateDTO, AdvancePaymentListDTO,int>
     {
-        Task Create(AdvancePaymentCreateDTO aPaymentServiceCreateDTO);
-        Task Update(AdvancePaymentUpdateDTO aPaymentServiceUpdateDTO);
-        Task Delete(int id);
     }
 }

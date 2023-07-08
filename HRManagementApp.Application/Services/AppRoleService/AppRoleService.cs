@@ -29,6 +29,11 @@ namespace HRManagementApp.Application.Services.AppRoleService
             throw new NotImplementedException();
         }
 
+        public Task<List<AppRoleListDTO>> List()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Update(AppRoleUpdateDTO appRoleUpdateDTO)
         {
             throw new NotImplementedException();

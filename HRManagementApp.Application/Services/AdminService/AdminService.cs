@@ -35,6 +35,13 @@ namespace HRManagementApp.Application.Services.AdminService
             await _adminRepository.Delete(await _adminRepository.GetBy(x => x.ID == id));
         }
 
+        public async Task<List<AdminListDTO>> List()
+        {
+            List<Admin> adminList = await _adminRepository.GetAll();
+
+            return _mapper.Map<List<AdminListDTO>>(adminList);
+        }
+
         public async Task Update(AdminUpdateDTO adminUpdateDTO)
         {
             await _adminRepository.Update(_mapper.Map<Admin>(adminUpdateDTO));

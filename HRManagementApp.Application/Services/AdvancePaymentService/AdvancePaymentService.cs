@@ -20,7 +20,7 @@ namespace HRManagementApp.Application.Services.AdvancePaymentService
             _advancePaymentRepository = advancePaymentRepository;
         }
 
-        public Task Create(AdvancePaymentCreateDTO aPaymentServiceCreateDTO)
+        public Task Create(AdvancePaymentCreateDTO createDTO)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +30,12 @@ namespace HRManagementApp.Application.Services.AdvancePaymentService
             throw new NotImplementedException();
         }
 
-        public Task Update(AdvancePaymentUpdateDTO aPaymentServiceUpdateDTO)
+        public Task<List<AdvancePaymentListDTO>> List()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Update(AdvancePaymentUpdateDTO updateDTO)
         {
             throw new NotImplementedException();
         }
