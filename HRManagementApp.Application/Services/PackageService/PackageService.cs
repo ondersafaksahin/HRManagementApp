@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagementApp.Application.DTOs.PackageDTOs;
+using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -19,24 +20,24 @@ namespace HRManagementApp.Application.Services.PackageService
             _mapper = mapper;
         }
 
-        public Task Create(PackageCreateDTO packageCreateDTO)
+        public async Task Create(PackageCreateDTO packageCreateDTO)
         {
-            throw new NotImplementedException();
+            await _packageRepository.Add(_mapper.Map<Package>(packageCreateDTO));
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _packageRepository.Delete(await _packageRepository.GetBy(x => x.ID == id));
         }
 
-        public Task<List<PackageListDTO>> List()
+        public async Task<List<PackageListDTO>> List()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<PackageListDTO>>(await _packageRepository.GetAll());
         }
 
-        public Task Update(PackageUpdateDTO packageUpdateDTO)
+        public async Task Update(PackageUpdateDTO packageUpdateDTO)
         {
-            throw new NotImplementedException();
+            await _packageRepository.Update(_mapper.Map<Package>(packageUpdateDTO));
         }
     }
 }

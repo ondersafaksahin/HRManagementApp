@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using HRManagementApp.Application.DTOs.EmployeeDTOs;
+using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,31 +15,33 @@ namespace HRManagementApp.Application.Services.EmployeeService
     {
         IEmployeeRepository _employeRepository;
         IMapper _mapper;
+        UserManager<AppUser> _userManager;
 
-        public EmployeeService(IEmployeeRepository employeRepository, IMapper mapper)
+        public EmployeeService(IEmployeeRepository employeRepository, IMapper mapper, UserManager<AppUser> userManager)
         {
             _employeRepository = employeRepository;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
-        public Task Create(EmployeeCreateDTO employeeCreateDTO)
+        public async Task Create(EmployeeCreateDTO employeeCreateDTO)
         {
-            throw new NotImplementedException();
+           await _employeRepository.Add(_mapper.Map<Employee>(employeeCreateDTO));
         }
 
-        public Task Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            await _employeRepository.Delete(await _employeRepository.GetBy(x => x.ID == id));
         }
 
-        public Task<List<EmployeeListDTO>> List()
+        public async Task<List<EmployeeListDTO>> List()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<EmployeeListDTO>>(await _employeRepository.GetAll());
         }
 
-        public Task Update(EmployeeUpdateDTO employeeUpdateDTO)
+        public async Task Update(EmployeeUpdateDTO employeeUpdateDTO)
         {
-            throw new NotImplementedException();
+            await _employeRepository.Update(_mapper.Map<Employee>(employeeUpdateDTO));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagementApp.Application.DTOs.AdvancePaymentDTOs;
+using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -20,24 +21,25 @@ namespace HRManagementApp.Application.Services.AdvancePaymentService
             _advancePaymentRepository = advancePaymentRepository;
         }
 
-        public Task Create(AdvancePaymentCreateDTO createDTO)
+        public async Task Create(AdvancePaymentCreateDTO createDTO)
         {
-            throw new NotImplementedException();
+            AdvancePayment advancePayment = _mapper.Map<AdvancePayment>(createDTO);
+            await _advancePaymentRepository.Add(advancePayment);
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _advancePaymentRepository.Delete(await _advancePaymentRepository.GetBy(x => x.ID == id));
         }
 
-        public Task<List<AdvancePaymentListDTO>> List()
+        public async Task<List<AdvancePaymentListDTO>> List()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<AdvancePaymentListDTO>>(await _advancePaymentRepository.GetAll());
         }
 
-        public Task Update(AdvancePaymentUpdateDTO updateDTO)
+        public async Task Update(AdvancePaymentUpdateDTO updateDTO)
         {
-            throw new NotImplementedException();
+            await _advancePaymentRepository.Update(_mapper.Map<AdvancePayment>(updateDTO));
         }
     }
 }

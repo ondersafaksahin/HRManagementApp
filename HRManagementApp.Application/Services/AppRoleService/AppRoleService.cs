@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagementApp.Application.DTOs.AppRoleDTOs;
+using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -19,24 +20,24 @@ namespace HRManagementApp.Application.Services.AppRoleService
             _mapper = mapper;
             _appRoleRepository = appRoleRepository;
         }
-        public Task Create(AppRoleCreateDTO appRoleCreateDTO)
+        public async Task Create(AppRoleCreateDTO appRoleCreateDTO)
         {
-            throw new NotImplementedException();
+            await _appRoleRepository.Add(_mapper.Map<AppRole>(appRoleCreateDTO));
         }
 
-        public Task Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            await _appRoleRepository.Delete(await _appRoleRepository.GetBy(x => x.Id == id));
         }
 
-        public Task<List<AppRoleListDTO>> List()
+        public async Task<List<AppRoleListDTO>> List()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<List<AppRoleListDTO>>(await _appRoleRepository.GetAll());
         }
 
-        public Task Update(AppRoleUpdateDTO appRoleUpdateDTO)
+        public async Task Update(AppRoleUpdateDTO appRoleUpdateDTO)
         {
-            throw new NotImplementedException();
+            await _appRoleRepository.Update(_mapper.Map<AppRole>(appRoleUpdateDTO));
         }
     }
 }
