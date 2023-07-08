@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Application.Services.PackageService
 {
-    public interface IPackageService
+    public interface IPackageService:IBaseService<PackageCreateDTO,PackageUpdateDTO,PackageListDTO,int>
     {
-        Task Create(PackageCreateDTO packageCreateDTO);
-        Task Update(PackageUpdateDTO packageUpdateDTO);
-        Task Delete(int id);
+     
     }
 }

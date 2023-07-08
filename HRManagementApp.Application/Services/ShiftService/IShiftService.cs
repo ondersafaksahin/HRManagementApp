@@ -8,10 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Application.Services.ShiftService
 {
-    public interface IShiftService
+    public interface IShiftService:IBaseService<ShiftCreateDTO,ShiftUpdateDTO,ShiftListDTO,int>
     {
-        Task Create(ShiftCreateDTO shiftCreateDTO);
-        Task Update(ShiftUpdateDTO shiftUpdateDTO);
-        Task Delete(int id);
     }
 }

@@ -29,6 +29,11 @@ namespace HRManagementApp.Application.Services.ExpenseService
             throw new NotImplementedException();
         }
 
+        public Task<List<ExpenseListDTO>> List()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Update(ExpenseUpdateDTO expenseUpdateDTO)
         {
             throw new NotImplementedException();

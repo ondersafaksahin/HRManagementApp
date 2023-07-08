@@ -29,6 +29,11 @@ namespace HRManagementApp.Application.Services.ShiftService
             throw new NotImplementedException();
         }
 
+        public Task<List<ShiftListDTO>> List()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Update(ShiftUpdateDTO shiftUpdateDTO)
         {
             throw new NotImplementedException();

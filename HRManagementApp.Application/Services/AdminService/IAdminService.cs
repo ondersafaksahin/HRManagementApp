@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Application.Services.AdminService
 {
-    public interface IAdminService
+    public interface IAdminService:IBaseService<AdminCreateDTO, AdminUpdateDTO, AdminListDTO, Guid>
     {
-        Task Create(AdminCreateDTO adminCreateDTO);
-        Task Update(AdminUpdateDTO adminUpdateDTO);
-        Task Delete(Guid id);
     }
 }

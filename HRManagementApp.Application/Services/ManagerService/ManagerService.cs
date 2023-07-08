@@ -30,6 +30,11 @@ namespace HRManagementApp.Application.Services.ManagerService
             throw new NotImplementedException();
         }
 
+        public Task<List<ManagerListDTO>> List()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Update(ManagerUpdateDTO managerUpdateDTO)
         {
             throw new NotImplementedException();

@@ -8,10 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Application.Services.AppRoleService
 {
-    public interface IAppRoleService
+    public interface IAppRoleService:IBaseService<AppRoleCreateDTO, AppRoleUpdateDTO, AppRoleListDTO, Guid>
     {
-        Task Create(AppRoleCreateDTO appRoleCreateDTO);
-        Task Update(AppRoleUpdateDTO appRoleUpdateDTO);
-        Task Delete(Guid id);
     }
 }
