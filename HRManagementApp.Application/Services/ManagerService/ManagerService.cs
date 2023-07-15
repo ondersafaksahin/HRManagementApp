@@ -15,13 +15,11 @@ namespace HRManagementApp.Application.Services.ManagerService
     {
         IManagerRepository _managerRepository;
         IMapper _mapper;
-        UserManager<AppUser> _userManager;
 
-        public ManagerService(IManagerRepository managerRepository, IMapper mapper,UserManager<AppUser> userManager)
+        public ManagerService(IManagerRepository managerRepository, IMapper mapper)
         {
             _managerRepository = managerRepository;
             _mapper = mapper;
-            _userManager = userManager;
         }
 
         public async Task Create(ManagerCreateDTO managerCreateDTO)

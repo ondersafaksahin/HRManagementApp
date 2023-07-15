@@ -2,6 +2,7 @@
 using HRManagementApp.Application.DTOs.AppRoleDTOs;
 using HRManagementApp.Domain.Entities.Concrete;
 using HRManagementApp.Domain.IRepositories;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

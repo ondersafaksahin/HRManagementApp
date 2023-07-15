@@ -28,6 +28,7 @@ namespace HRManagementApp.Application.Services.AdminService
         {
             Admin admin = _mapper.Map<Admin>(adminCreateDTO);
             await _adminRepository.Add(admin);
+            
         }
 
         public async Task Delete(Guid id)
