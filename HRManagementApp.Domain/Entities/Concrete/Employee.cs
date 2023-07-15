@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Domain.Entities.Concrete
 {
-    public class Employee: IBaseEntity, IEntity<Guid>,IUserEntity
+    public class Employee: IBaseEntity
     {
         //IEntity Interface
         public Guid ID { get; set; }
@@ -43,14 +43,14 @@ namespace HRManagementApp.Domain.Entities.Concrete
 
 
         //Navigation Properties
-        public AppUser AppUser { get; set; }
+        public virtual AppUser AppUser { get; set; }
         public Guid AppUserID { get; set; }
-        public Company? Company { get; set; }
+        public virtual Company? Company { get; set; }
         public Guid? CompanyID { get; set; }
-        public List<Expense>? Expenses { get; set; }
-        public List<Leave>? Leaves  { get; set; }
-        public List<AdvancePayment>? AdvancePayments { get; set; }
-        public Shift? Shift { get; set; }
+        public virtual List<Expense>? Expenses { get; set; }
+        public virtual List<Leave>? Leaves  { get; set; }
+        public virtual List<AdvancePayment>? AdvancePayments { get; set; }
+        public virtual Shift? Shift { get; set; }
         public int? ShiftID { get; set; }
     }
 }

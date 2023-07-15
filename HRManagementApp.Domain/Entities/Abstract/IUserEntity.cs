@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Domain.Entities.Abstract
 {
-    public interface IUserEntity
+    public interface IUserEntity: IBaseEntity,IEntity<Guid>
     {
         public byte[]? Picture { get; set; }
         public string FirstName { get; set; }
