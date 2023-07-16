@@ -43,7 +43,6 @@ namespace HRManagementApp.Domain.Entities.Concrete
 
 
         //Navigation Properties
-        public virtual AppUser AppUser { get; set; }
         public Guid AppUserID { get; set; }
         public virtual Company? Company { get; set; }
         public Guid? CompanyID { get; set; }

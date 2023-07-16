@@ -15,13 +15,11 @@ namespace HRManagementApp.Application.Services.AdminService
     {
         readonly IAdminRepository _adminRepository;
         readonly IMapper _mapper;
-        readonly UserManager<AppUser> _userManager;
 
-        public AdminService(IAdminRepository adminRepository,IMapper mapper,UserManager<AppUser> userManager)
+        public AdminService(IAdminRepository adminRepository,IMapper mapper)
         {
             _adminRepository = adminRepository;
             _mapper = mapper;
-            _userManager = userManager;
         }
 
         public async Task Create(AdminCreateDTO adminCreateDTO)

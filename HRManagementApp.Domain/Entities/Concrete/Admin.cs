@@ -29,7 +29,6 @@ namespace HRManagementApp.Domain.Entities.Concrete
 
 
         //Navigation Properties
-        public AppUser AppUser { get; set; }
         public Guid AppUserID { get; set; }
     }
 }
