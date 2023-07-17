@@ -33,6 +33,6 @@ namespace HRManagementApp.Domain.Entities.Concrete
 
 
         //Navigation Properties
-        public List<Company> Companies { get; set; }
+        public virtual List<Company> Companies { get; set; }
     }
 }

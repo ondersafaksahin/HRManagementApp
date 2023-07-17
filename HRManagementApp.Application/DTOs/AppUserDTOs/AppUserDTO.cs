@@ -21,6 +21,7 @@ namespace HRManagementApp.Application.DTOs.AppUserDTOs
         public DateTime? ModifiedDate { get; set; }
         public string? ModifiedBy { get; set; }
         public Status Status { get; set; }
+        public string? PhoneNumber { get; set; }
 
     }
 }
