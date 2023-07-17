@@ -18,7 +18,7 @@ namespace HRManagementApp.Infrastructure.Extensions
         private const string AdminID = "0031c609-4d45-4c50-bbee-278e9dd5ed73";
         private const string AdminRoleID = "6ee57077-8be1-4991-850d-fcb5a6960473";
 
-        public static void Seed(ModelBuilder builder,HRDBContext database)
+        public static void Seed(this ModelBuilder builder,HRDBContext database)
         {
 
             //Seed Roles
@@ -79,7 +79,7 @@ namespace HRManagementApp.Infrastructure.Extensions
             };
             builder.Entity<AppUser>().HasData(user);
             builder.Entity<Admin>().HasData(admin);
-            database.UserRoles.AddAsync(new IdentityUserRole<Guid> { RoleId = Guid.Parse(AdminRoleID), UserId = Guid.Parse(AdminID) });
+            builder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid> { RoleId = Guid.Parse(AdminRoleID), UserId = Guid.Parse(AdminID) });
 
             //Seed Packages
 

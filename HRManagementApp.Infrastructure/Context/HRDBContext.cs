@@ -2,6 +2,7 @@
 using HRManagementApp.Infrastructure.Mapping;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using HRManagementApp.Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,7 @@ namespace HRManagementApp.Infrastructure.Context
             builder.ApplyConfiguration(new ManagerMapping());
             builder.ApplyConfiguration(new PackageMapping());
             builder.ApplyConfiguration(new ShiftMapping());
+            builder.Seed(this);
             base.OnModelCreating(builder);
         }
     }
