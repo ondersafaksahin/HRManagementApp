@@ -80,6 +80,14 @@ namespace HRManagementApp.Infrastructure.Extensions
             builder.Entity<AppUser>().HasData(user);
             builder.Entity<Admin>().HasData(admin);
             database.UserRoles.AddAsync(new IdentityUserRole<Guid> { RoleId = Guid.Parse(AdminRoleID), UserId = Guid.Parse(AdminID) });
+
+            //Seed Packages
+
+            Package standart = new Package() { CreatedBy = "Admin", ID = 1, Currency = "$", Price = 10, DurationDays = 30, PackageName = "Standart", Status = Domain.Enums.Status.Active, ReleaseDate = DateTime.Now };
+            Package business = new Package() { CreatedBy = "Admin", ID = 2, Currency = "$", Price = 20, DurationDays = 30, PackageName = "Business", Status = Domain.Enums.Status.Active, ReleaseDate = DateTime.Now };
+            Package premium = new Package() { CreatedBy = "Admin", ID = 3, Currency = "$", Price = 30, DurationDays = 30, PackageName = "Premium", Status = Domain.Enums.Status.Active, ReleaseDate = DateTime.Now };
+            var packages = new List<Package>() { standart, business, premium };
+            builder.Entity<Package>().HasData(packages);
         }
     }
 }
