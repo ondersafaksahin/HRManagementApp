@@ -112,7 +112,6 @@ namespace HRManagementApp.Application.Services.AppUserService
                     CompanyID = registerDTO.CompanyID,
                     CreatedDate = DateTime.Now,
                     ID = Guid.NewGuid(),
-                    AppUser = await _appUserRepository.GetBy(x => x.Email == registerDTO.Email),
                     AppUserID = (await _appUserRepository.GetBy(x => x.Email == registerDTO.Email)).Id,
                     Company=await _companyRepository.GetBy(x=>x.ID==registerDTO.CompanyID)
                 });
