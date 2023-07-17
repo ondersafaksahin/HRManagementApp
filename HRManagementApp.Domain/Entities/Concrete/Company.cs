@@ -41,11 +41,11 @@ namespace HRManagementApp.Domain.Entities.Concrete
 
 
         //Navigation Properties
-        public List<Employee>? Employees { get; set; }
-        public Manager Manager { get; set; }
+        public virtual List<Employee>? Employees { get; set; }
+        public virtual Manager Manager { get; set; }
         public Guid ManagerID { get; set; }
-        public Package? Package { get; set; }
+        public virtual Package? Package { get; set; }
         public int? PackageID { get; set; }
-        public  List<Shift> Shifts{ get; set; }
+        public virtual List<Shift> Shifts{ get; set; }
     }
 }

@@ -79,7 +79,7 @@ namespace HRManagementApp.Application.Services.AppUserService
 
         public async Task<SignInResult> Login(LoginDTO loginDTO)
         {
-            return await _signInManager.PasswordSignInAsync(loginDTO.Email, loginDTO.PasswordHash, true,false);
+            return await _signInManager.PasswordSignInAsync(loginDTO.Email, loginDTO.Password, true,false);
         }
 
         public async Task LogOut()

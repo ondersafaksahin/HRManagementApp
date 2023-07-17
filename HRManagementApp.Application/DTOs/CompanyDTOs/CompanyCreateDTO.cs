@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HRManagementApp.Domain.Entities.Concrete;
+using HRManagementApp.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,21 @@ namespace HRManagementApp.Application.DTOs.CompanyDTOs
 {
     public class CompanyCreateDTO
     {
+        public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public byte[]? Logo { get; set; }
+        public string CompanyName { get; set; }
+        public string? Title { get; set; }
+        public string? TaxNumber { get; set; }
+        public string? TaxAdministration { get; set; }
+        public string Email { get; set; }
+        public DateTime? ContractStartDate { get; set; }
+        public DateTime? ContractEndDate { get; set; }
+        public string? Address { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? City { get; set; }
+        public string ContactName { get; set; }
+        public string? ContactTitle { get; set; }
+        public int? PackageID { get; set; }
     }
 }

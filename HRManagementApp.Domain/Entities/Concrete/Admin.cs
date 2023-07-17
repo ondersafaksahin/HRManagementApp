@@ -16,7 +16,7 @@ namespace HRManagementApp.Domain.Entities.Concrete
 
         //IBaseEntity Interface
         public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; } = "Admin";
+        public string CreatedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public string? ModifiedBy { get; set; }
         public Status Status { get; set; }

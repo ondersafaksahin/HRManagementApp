@@ -35,7 +35,7 @@ namespace HRManagementApp.Domain.Entities.Concrete
 
 
         //Navigation Properties
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
         public Guid EmployeeID { get; set; }
     }
 }

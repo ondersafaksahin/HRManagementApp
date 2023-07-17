@@ -15,18 +15,19 @@ namespace HRManagementApp.Application.Services.AdminService
     {
         readonly IAdminRepository _adminRepository;
         readonly IMapper _mapper;
+        readonly UserManager<AppUser> _userManager;
 
-        public AdminService(IAdminRepository adminRepository,IMapper mapper)
+        public AdminService(IAdminRepository adminRepository,IMapper mapper, UserManager<AppUser> userManager)
         {
             _adminRepository = adminRepository;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task Create(AdminCreateDTO adminCreateDTO)
         {
             Admin admin = _mapper.Map<Admin>(adminCreateDTO);
-            await _adminRepository.Add(admin);
-            
+            await _adminRepository.Add(admin);      
         }
 
         public async Task Delete(Guid id)
