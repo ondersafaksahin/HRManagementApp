@@ -23,5 +23,13 @@ namespace HRManagementApp.Application.Services.AppUserService
         Task LogOut();
         Task<AppUserDTO> GetByUsername(string email);
         Task<AppUserDTO> GetByID(Guid id);
+        Task<string> PasswordGenerator();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userIdentifier">The unique part for user that comes before @ symbol</param>
+        /// <param name="domainExtension">The part that comes after @ symbol</param>
+        /// <returns></returns>
+        Task<string> MailGenerator(string userIdentifier,string domainExtension);
     }
 }
