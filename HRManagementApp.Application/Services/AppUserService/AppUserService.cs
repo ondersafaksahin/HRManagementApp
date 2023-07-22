@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -85,6 +86,38 @@ namespace HRManagementApp.Application.Services.AppUserService
         public async Task LogOut()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<string> MailGenerator(string userIdentifier,string domainExtension)
+        {
+            return await Task.FromResult(string.Concat(userIdentifier,'@',domainExtension));
+        }
+
+        public async Task<string> PasswordGenerator()
+        {
+            Random random = new Random();
+            string password = "";
+            const string uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+            const string digits = "0123456789";
+            for (int i = 0; i < 3; i++)
+            {
+                password += uppercaseLetters[random.Next(uppercaseLetters.Length)];
+                password += lowercaseLetters[random.Next(lowercaseLetters.Length)];
+                password += digits[random.Next(digits.Length)];
+            }
+            char[] result = password.ToCharArray();
+            int n = result.Length;
+
+            for (int i = n - 1; i > 0; i--)
+            {
+                int j = random.Next(i + 1);
+                char temp = result[i];
+                result[i] = result[j];
+                result[j] = temp;
+            }
+
+            return await Task.FromResult(string.Concat(result));
         }
 
         public async Task<IdentityResult> Register(RegisterDTO registerDTO)
