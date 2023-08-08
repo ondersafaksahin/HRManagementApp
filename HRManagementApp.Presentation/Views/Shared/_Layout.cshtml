@@ -3,42 +3,91 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HRManagementApp.Presentation</title>
+    <title>@ViewData["Title"] - HRManagementApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HRManagementApp.Presentation.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3" id="navbarmain">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HRManagementApp.Presentation</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HRManagement App</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between mx-5">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark w3-hover-text-blue" href="#about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark w3-hover-text-blue" href="#pricing">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark w3-hover-text-blue" href="#references">References</a>
                         </li>
                     </ul>
+                    <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="navbar-item">
+                                    <a class="nav-link text-dark w3-hover-text-blue" asp-area="Admin" asp-controller="Admin" asp-action="GetAdmin" asp-route-userName="@User.Identity.Name">View Profile</a>
+                                </li>
+                                <li class="navbar-item">
+                                    <a class="nav-link text-dark w3-hover-text-blue" asp-area="Admin" asp-controller="Admin" asp-action="Edit" asp-route-userName="@User.Identity.Name">Edit Profile</a>
+                                </li>
+                            }
+                            else if (User.IsInRole("Manager"))
+                            {
+                                <li class="navbar-item">
+                                    <a class="nav-link text-dark w3-hover-text-blue" asp-area="Manager" asp-controller="Manager" asp-action="GetManager" asp-route-userName="@User.Identity.Name">View Profile</a>
+                                </li>
+                                <li class="navbar-item">
+                                    <a class="nav-link text-dark w3-hover-text-blue" asp-area="Manager" asp-controller="Manager" asp-action="Edit" asp-route-userName="@User.Identity.Name">Edit Profile</a>
+                                </li>
+                            }
+                            else if (User.IsInRole("Employee"))
+                            {
+                                <li class="navbar-item">
+                                    <a class="nav-link text-dark w3-hover-text-blue" asp-area="Employee" asp-controller="Employee" asp-action="GetEmployee" asp-route-userName="@User.Identity.Name">View Profile</a>
+                                </li>
+                                <li class="navbar-item">
+                                    <a class="nav-link text-dark w3-hover-text-blue" asp-area="Employee" asp-controller="Employee" asp-action="Edit" asp-route-userName="@User.Identity.Name">Edit Profile</a>
+                                </li>
+                            }
+                            <li class="navbar-item">
+                                <a class="nav-link text-danger " asp-controller="Account" asp-area="" asp-action="LogOut">@User.Identity.Name, log out</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="navbar-item">
+                                <a class="nav-link text-dark w3-hover-text-blue" asp-controller="Account" asp-action="LogIn">Log In</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a class="nav-link text-dark w3-hover-text-blue" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
+                
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container" data-spy="scroll" data-target="#navbarmain" data-offset="0">
+        <main role="main" class="py-5">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - HRManagementApp.Presentation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container-fluid">
+            &copy; 2023 - HRManagementApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -2,7 +2,135 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<script>setInterval(window.location.reload, 3000);</script>
+
+<div class="demo">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <h1 class="heading-title">Welcome to HR Manager Application !</h1>
+            <h2>Your Company's Best Friend in HR Processes</h2>
+        </div>
+
+        <div class="container2 mb-5" id="about">
+            <img src="https://picsum.photos/600/600/?random" style="width:100%;max-height:400px;filter:contrast(.5) brightness(.5);">
+            <div class="centered">
+                <h2 style="font-size:1.6vw">HR Manager App has been serving more than 140 companies in 7 countries for years.</h2>
+                <p></p>
+                <h5 style ="font-size:1.25vw">What can you do with HR Manager App ?</h5>
+                <hr />
+                <p style="font-size:0.8vw">Here are some of the things you can do with this application that draws its strength from its experience:</p>
+                <ul style="text-align:left;font-size:0.8vw">
+                    <li>Manage your workers' debits, leave, shifts and fixtures</li>
+                    <li>Manage payroll and salary information of people in your company</li>
+                    <li>Streamline your users' requests and communications with HR</li>
+                    <li>And much more...</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row" id="pricing">
+            <div class="col-md-4 col-sm-6">
+                <div class="pricingTable">
+                    <div class="pricingTable-header">
+                        <h3 class="heading">Standard</h3>
+                        <span class="subtitle">Best for Start-Ups</span>
+                        <div class="price-value">
+                            10
+                            <span class="currency">$</span>
+                            <span class="month">/mo</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-content">
+                        <li>50GB Disk Space</li>
+                        <li>50 Email Accounts</li>
+                        <li>50GB Monthly Bandwidth</li>
+                        <li>10 Subdomains</li>
+                        <li>15 Domains</li>
+                    </ul>
+                    <a asp-controller="Account" asp-action="Register" class="read">sign up<i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <div class="pricingTable">
+                    <div class="pricingTable-header">
+                        <h3 class="heading">Business</h3>
+                        <span class="subtitle">Best for Mid-Level Companies</span>
+                        <div class="price-value">
+                            20
+                            <span class="currency">$</span>
+                            <span class="month">/mo</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-content">
+                        <li>60GB Disk Space</li>
+                        <li>60 Email Accounts</li>
+                        <li>60GB Monthly Bandwidth</li>
+                        <li>15 Subdomains</li>
+                        <li>20 Domains</li>
+                    </ul>
+                    <a asp-controller="Account" asp-action="Register" class="read">sign up<i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <div class="pricingTable">
+                    <div class="pricingTable-header">
+                        <h3 class="heading">Premium</h3>
+                        <span class="subtitle">Professional Package for Pro Comporates</span>
+                        <div class="price-value">
+                            30
+                            <span class="currency">$</span>
+                            <span class="month">/mo</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-content">
+                        <li>70GB Disk Space</li>
+                        <li>70 Email Accounts</li>
+                        <li>70GB Monthly Bandwidth</li>
+                        <li>20 Subdomains</li>
+                        <li>25 Domains</li>
+                    </ul>
+                    <a asp-controller="Account" asp-action="Register" class="read">sign up<i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div id="references" class="w3-container w3-padding-32">
+                <h2 class="w3-border-bottom w3-border-light-grey w3-padding-16">References</h2>
+            </div>
+
+            <div class="w3-row-padding">
+
+                <div class="w3-col l3 m6 w3-margin-bottom">
+                    <div class="w3-display-container">
+                        <div class="w3-display-topleft w3-black w3-padding">Company1</div>
+                        <img src="" alt="" style="width:100%">
+                    </div>
+                </div>
+
+                <div class="w3-col l3 m6 w3-margin-bottom">
+                    <div class="w3-display-container">
+                        <div class="w3-display-topleft w3-black w3-padding">Company2</div>
+                        <img src="" alt="" style="width:100%">
+                    </div>
+                </div>
+
+                <div class="w3-col l3 m6 w3-margin-bottom">
+                    <div class="w3-display-container">
+                        <div class="w3-display-topleft w3-black w3-padding">Company3</div>
+                        <img src="" alt="" style="width:100%">
+                    </div>
+                </div>
+
+                <div class="w3-col l3 m6 w3-margin-bottom">
+                    <div class="w3-display-container">
+                        <div class="w3-display-topleft w3-black w3-padding">Company4</div>
+                        <img src="" alt="" style="width:100%">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Credits to http://labs.bootstrapthemes.co/demo/Resource/PricingTableStyleDemo38/ -->
