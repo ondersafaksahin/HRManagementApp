@@ -13,13 +13,11 @@ namespace HRManagementApp.Application.Services.AdminService
 {
     public class AdminService : IAdminService
     {
-        readonly IAdminRepository _adminRepository;
         readonly IMapper _mapper;
         readonly UserManager<AppUser> _userManager;
 
-        public AdminService(IAdminRepository adminRepository,IMapper mapper, UserManager<AppUser> userManager)
+        public AdminService(IMapper mapper, UserManager<AppUser> userManager)
         {
-            _adminRepository = adminRepository;
             _mapper = mapper;
             _userManager = userManager;
         }
@@ -27,24 +25,25 @@ namespace HRManagementApp.Application.Services.AdminService
         public async Task Create(AdminCreateDTO adminCreateDTO)
         {
             Admin admin = _mapper.Map<Admin>(adminCreateDTO);
-            await _adminRepository.Add(admin);      
+            var result = await _userManager.CreateAsync(admin);
+            await _userManager.AddToRoleAsync(admin, "Admin");
         }
 
         public async Task Delete(Guid id)
         {
-            await _adminRepository.Delete(await _adminRepository.GetBy(x => x.ID == id));
+            await _userManager.DeleteAsync(await _userManager.FindByIdAsync(id.ToString()));
         }
 
         public async Task<List<AdminListDTO>> List()
         {
-            List<Admin> adminList = await _adminRepository.GetAll();
+            IList<AppUser> adminList = await _userManager.GetUsersInRoleAsync("Admin");
 
             return _mapper.Map<List<AdminListDTO>>(adminList);
         }
 
         public async Task Update(AdminUpdateDTO adminUpdateDTO)
         {
-            await _adminRepository.Update(_mapper.Map<Admin>(adminUpdateDTO));
+            await _userManager.UpdateAsync(_mapper.Map<Admin>(adminUpdateDTO));
         }
     }
 }

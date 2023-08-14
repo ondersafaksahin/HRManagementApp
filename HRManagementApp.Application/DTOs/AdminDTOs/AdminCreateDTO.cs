@@ -10,6 +10,6 @@ namespace HRManagementApp.Application.DTOs.AdminDTOs
     {
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
-        public Guid AppUserID { get; set; }
+        public string Email { get; set; }
     }
 }

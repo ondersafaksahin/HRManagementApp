@@ -13,35 +13,36 @@ namespace HRManagementApp.Application.Services.EmployeeService
 {
     public class EmployeeService : IEmployeeService
     {
-        IEmployeeRepository _employeRepository;
         IMapper _mapper;
-        UserManager<AppUser> _userManager;
+        UserManager<Employee> _userManager;
 
-        public EmployeeService(IEmployeeRepository employeRepository, IMapper mapper, UserManager<AppUser> userManager)
+        public EmployeeService(IMapper mapper, UserManager<Employee> userManager)
         {
-            _employeRepository = employeRepository;
             _mapper = mapper;
             _userManager = userManager;
         }
 
         public async Task Create(EmployeeCreateDTO employeeCreateDTO)
         {
-           await _employeRepository.Add(_mapper.Map<Employee>(employeeCreateDTO));
+            var employee = _mapper.Map<Employee>(employeeCreateDTO);
+            await _userManager.CreateAsync(employee);
+            await _userManager.AddToRoleAsync(employee, "Employee");
         }
 
         public async Task Delete(Guid id)
         {
-            await _employeRepository.Delete(await _employeRepository.GetBy(x => x.ID == id));
+            await _userManager.DeleteAsync(await _userManager.FindByIdAsync(id.ToString()));
         }
 
         public async Task<List<EmployeeListDTO>> List()
         {
-            return _mapper.Map<List<EmployeeListDTO>>(await _employeRepository.GetAll());
+            var employeeList = await _userManager.GetUsersInRoleAsync("employee");
+            return _mapper.Map<List<EmployeeListDTO>>(employeeList);
         }
 
         public async Task Update(EmployeeUpdateDTO employeeUpdateDTO)
         {
-            await _employeRepository.Update(_mapper.Map<Employee>(employeeUpdateDTO));
+            await _userManager.UpdateAsync(_mapper.Map<Employee>(employeeUpdateDTO));
         }
     }
 }

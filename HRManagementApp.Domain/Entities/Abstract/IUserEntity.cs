@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Domain.Entities.Abstract
 {
-    public interface IUserEntity: IBaseEntity,IEntity<Guid>
+    public interface IUserEntity: IBaseEntity
     {
         public byte[]? Picture { get; set; }
         public string FirstName { get; set; }
@@ -17,12 +17,10 @@ namespace HRManagementApp.Domain.Entities.Abstract
         public string? NationalID { get; set; }
         public DateTime? HireDate { get; set; }
         public DateTime? LeaveDate { get; set; }
-        public Company? Company { get; set; }
-        public Guid? CompanyID { get; set; }
         public string? Job { get; set; }
         public string? Department { get; set; }
         public string? Address { get; set; }
-        public string? PhoneNumber { get; set; }
         public decimal Salary { get; set; }
+
     }
 }

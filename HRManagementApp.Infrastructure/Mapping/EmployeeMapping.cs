@@ -13,7 +13,7 @@ namespace HRManagementApp.Infrastructure.Mapping
     {
         public override void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.HasKey(x => x.ID);
+            builder.HasKey(x => x.Id);
             builder.HasOne(x => x.Company).WithMany(x => x.Employees).HasForeignKey(x => x.CompanyID);
             builder.HasOne(x => x.Shift).WithMany(x => x.Employees).HasForeignKey(x => x.ShiftID);
             builder.Property(x => x.Salary).HasColumnType("money");

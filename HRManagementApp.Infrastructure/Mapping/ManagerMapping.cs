@@ -12,6 +12,7 @@ namespace HRManagementApp.Infrastructure.Mapping
     {
         public override void Configure(EntityTypeBuilder<Manager> builder)
         {
+            builder.HasOne(x => x.Company).WithMany(x => x.Managers).HasForeignKey(x => x.CompanyID);
             base.Configure(builder);
         }
     }

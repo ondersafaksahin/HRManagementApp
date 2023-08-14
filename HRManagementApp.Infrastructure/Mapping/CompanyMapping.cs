@@ -14,7 +14,6 @@ namespace HRManagementApp.Infrastructure.Mapping
         {
             builder.HasKey(x => x.ID);
             builder.HasOne(x => x.Package).WithMany(x => x.Companies).HasForeignKey(x => x.PackageID);
-            builder.HasOne(x => x.Manager).WithOne(x => x.Company);
             base.Configure(builder);
         }
     }

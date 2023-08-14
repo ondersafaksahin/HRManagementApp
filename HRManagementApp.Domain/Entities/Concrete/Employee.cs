@@ -8,21 +8,10 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Domain.Entities.Concrete
 {
-    public class Employee: IBaseEntity
+    public class Employee: AppUser, IUserEntity
     {
-        //IEntity Interface
-        public Guid ID { get; set; }
-
-
-        //IBaseEntity Interface
-        public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public string? ModifiedBy { get; set; }
-        public Status Status { get; set; }
-
-
-        //IUserEntity Interface
+        //Navigation Properties
+        
         public byte[]? Picture { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -34,22 +23,13 @@ namespace HRManagementApp.Domain.Entities.Concrete
         public string? Job { get; set; }
         public string? Department { get; set; }
         public string? Address { get; set; }
-        public string? PhoneNumber { get; set; }
         public decimal Salary { get; set; }
-
-
-        //Extra Properties
-
-
-
-        //Navigation Properties
-        public Guid AppUserID { get; set; }
         public virtual Company? Company { get; set; }
         public Guid? CompanyID { get; set; }
-        public virtual List<Expense>? Expenses { get; set; }
-        public virtual List<Leave>? Leaves  { get; set; }
-        public virtual List<AdvancePayment>? AdvancePayments { get; set; }
         public virtual Shift? Shift { get; set; }
         public int? ShiftID { get; set; }
+        public virtual List<Expense>? Expenses { get; set; }
+        public virtual List<Leave>? Leaves { get; set; }
+        public virtual List<AdvancePayment>? AdvancePayments { get; set; }
     }
 }

@@ -16,6 +16,5 @@ namespace HRManagementApp.Application.DTOs.AdminDTOs
         public string? PhoneNumber { get; set; }
         public DateTime CreatedDate { get; set; }
         public Status Status { get; set; }
-        public Guid AppUserID { get; set; }
     }
 }

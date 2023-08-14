@@ -17,7 +17,7 @@ namespace HRManagementApp.Application.Services.AppUserService
         Task<SignInResult> Login(LoginDTO loginDTO);
         Task<IdentityResult> Register(RegisterDTO registerDTO);
         Task ForgotPassword(ForgotPasswordDTO forgotPasswordDTO);
-        Task<string> ChangePassword(ChangePasswordDTO changePasswordDTO);
+        Task<IdentityResult> ChangePassword(ChangePasswordDTO changePasswordDTO);
         Task AddToRole(AppUserDTO appUserDTO,string role);
         Task<List<AppUserListDTO>>List();
         Task LogOut();
