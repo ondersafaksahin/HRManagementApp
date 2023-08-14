@@ -55,7 +55,7 @@ namespace HRManagementApp.Infrastructure.Extensions
             builder.Entity<AppRole>().HasData(roles);
 
             // Seed Admin
-            Admin user = new()
+            AppUser user = new AppUser()
             {
                 UserName = AdminEmail,
                 NormalizedEmail = AdminEmail.ToUpper(),
@@ -65,8 +65,6 @@ namespace HRManagementApp.Infrastructure.Extensions
                 NormalizedUserName = AdminEmail.ToUpper(),
                 Id = Guid.Parse(AdminID),
                 Status = Domain.Enums.Status.Active,
-                FirstName = "Önder Şafak",
-                LastName = "Şahin",
             };
             user.PasswordHash = new PasswordHasher<AppUser>().HashPassword(user, AdminPassword);
             builder.Entity<AppUser>().HasData(user);

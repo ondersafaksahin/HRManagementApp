@@ -17,22 +17,17 @@ namespace HRManagementApp.Infrastructure.Context
         {
         }
 
-        public DbSet<Admin> Admins { get; set; }
         public DbSet<AdvancePayment> AdvancePayments { get; set; }
         public DbSet<Company> Companies { get; set; }
-        public DbSet<Employee> Employees { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<Package> Packages { get; set; }
         public DbSet<Shift> Shifts { get; set; }
-        public DbSet<Manager> Managers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new AdminMapping());
             builder.ApplyConfiguration(new AdvancePaymentMapping());
             builder.ApplyConfiguration(new CompanyMapping());
-            builder.ApplyConfiguration(new EmployeeMapping());
             builder.ApplyConfiguration(new ExpenseMapping());
             builder.ApplyConfiguration(new LeaveMapping());
             builder.ApplyConfiguration(new ManagerMapping());
