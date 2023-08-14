@@ -18,6 +18,5 @@ namespace HRManagementApp.Application.DTOs.AdminDTOs
         public byte[]? Picture { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public Guid AppUserID { get; set; }
     }
 }

@@ -18,21 +18,20 @@ namespace HRManagementApp.Application.Services.AppUserService
 {
     public class AppUserService : IAppUserService
     {
-        IAppUserRepository _appUserRepository;
         IMapper _mapper;
         UserManager<AppUser> _userManager;
         SignInManager<AppUser> _signInManager;
-        IEmployeeRepository _employeeRepository;
         ICompanyRepository _companyRepository;
+        PasswordHasher<AppUser> _passwordHasher;
+        PasswordValidator<AppUser> _passwordValidator;
 
-        public AppUserService(IAppUserRepository appUserRepository, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IEmployeeRepository employeeRepository, ICompanyRepository companyRepository)
+        public AppUserService(IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ICompanyRepository companyRepository, PasswordHasher<AppUser> passwordHasher, PasswordValidator<AppUser> passwordValidator)
         {
-            _appUserRepository = appUserRepository;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
-            _employeeRepository = employeeRepository;
             _companyRepository = companyRepository;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task AddToRole(AppUserDTO appUserDTO, string role)
@@ -40,22 +39,16 @@ namespace HRManagementApp.Application.Services.AppUserService
             await _userManager.AddToRoleAsync(_mapper.Map<AppUser>(appUserDTO), role);
         }
 
-        public async Task<string> ChangePassword(ChangePasswordDTO changePasswordDTO)
+        public async Task<IdentityResult> ChangePassword(ChangePasswordDTO changePasswordDTO)
         {
-            var appUser = await _appUserRepository.GetBy(x => x.Email == changePasswordDTO.Email);
-            PasswordVerificationResult result = _userManager.PasswordHasher.VerifyHashedPassword(appUser, appUser.PasswordHash, changePasswordDTO.CurrentPassword);
-            string answer;
+            var appUser = await _userManager.FindByEmailAsync(changePasswordDTO.Email);
+            var result = _userManager.PasswordHasher.VerifyHashedPassword(appUser, appUser.PasswordHash, changePasswordDTO.CurrentPassword);
 
             if (result==PasswordVerificationResult.Success && changePasswordDTO.NewPassword1==changePasswordDTO.NewPassword2)
             {
-                answer = "Password has been successfully changed";
-                await _userManager.ChangePasswordAsync(appUser, changePasswordDTO.CurrentPassword, changePasswordDTO.NewPassword1);
+                return await _userManager.ChangePasswordAsync(appUser, changePasswordDTO.CurrentPassword, changePasswordDTO.NewPassword1);
             }
-            else
-            {
-                answer = "Password could not be changed. Please check your input";
-            }
-            return answer;
+            return IdentityResult.Failed(new IdentityError { Description = "Please check your input" });
         }
 
         public Task ForgotPassword(ForgotPasswordDTO forgotPasswordDTO)
@@ -65,17 +58,17 @@ namespace HRManagementApp.Application.Services.AppUserService
 
         public async Task<AppUserDTO> GetByID(Guid id)
         {
-            return _mapper.Map<AppUserDTO>(await _appUserRepository.GetBy(x => x.Id == id)); 
+            return _mapper.Map<AppUserDTO>(await _userManager.FindByIdAsync(id.ToString())); 
         }
 
         public async Task<AppUserDTO> GetByUsername(string email)
         {
-            return _mapper.Map<AppUserDTO>(await _appUserRepository.GetBy(x => x.Email==email));
+            return _mapper.Map<AppUserDTO>(await _userManager.FindByEmailAsync(email));
         }
 
         public async Task<List<AppUserListDTO>> List()
         {
-            return _mapper.Map<List<AppUserListDTO>>(await _appUserRepository.GetAll());
+            return _mapper.Map<List<AppUserListDTO>>(await _userManager.Users.ToListAsync());
         }
 
         public async Task<SignInResult> Login(LoginDTO loginDTO)
@@ -123,33 +116,23 @@ namespace HRManagementApp.Application.Services.AppUserService
         public async Task<IdentityResult> Register(RegisterDTO registerDTO)
         {
             IdentityResult result;
-            var user = _mapper.Map<AppUser>(registerDTO);
+            var user = (Employee)_mapper.Map<AppUser>(registerDTO);
             user.CreatedBy = registerDTO.UserName;
             user.CreatedDate = DateTime.Now;
             user.UserName = registerDTO.Email;
             user.NormalizedEmail = registerDTO.Email.ToUpper();
             user.NormalizedUserName = user.NormalizedEmail;
-            if (registerDTO.Password1 == registerDTO.Password2)
-            {
-                result = await _userManager.CreateAsync(user, registerDTO.Password1);
-            }
-            else 
-            {
-                result = IdentityResult.Failed();
-            }
-            if (result.Succeeded)
-            {
 
-                await _employeeRepository.Add(new Employee
-                {
-                    CompanyID = registerDTO.CompanyID,
-                    CreatedDate = DateTime.Now,
-                    ID = Guid.NewGuid(),
-                    AppUserID = (await _appUserRepository.GetBy(x => x.Email == registerDTO.Email)).Id,
-                    Company=await _companyRepository.GetBy(x=>x.ID==registerDTO.CompanyID)
-                });
-                await _signInManager.SignInAsync(user, true);
+            if (registerDTO.Password1 != registerDTO.Password2)
+            {
+                result = IdentityResult.Failed(new IdentityError { Description = "Passwords do not match" });
+                return result; 
             }
+
+            user.Company = await _companyRepository.GetBy(x => x.ID == registerDTO.CompanyID);
+            result = await _userManager.CreateAsync(user, registerDTO.Password1);
+            await _userManager.AddToRoleAsync(user, "Employee");
+            await _signInManager.SignInAsync(user, true);
             return result;
         }
     }

@@ -8,27 +8,10 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Domain.Entities.Concrete
 {
-    public class Admin : IBaseEntity, IEntity<Guid>
+    public class Admin : AppUser
     {
-        //IEntity Interface
-        public Guid ID { get; set; }
-
-
-        //IBaseEntity Interface
-        public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public string? ModifiedBy { get; set; }
-        public Status Status { get; set; }
-
-
-        //Extra Properties
         public byte[]? Picture { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-
-
-        //Navigation Properties
-        public Guid AppUserID { get; set; }
     }
 }

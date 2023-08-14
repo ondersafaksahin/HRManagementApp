@@ -1,0 +1,56 @@
+﻿<style>
+
+    input[type="submit"] {
+  width: 100%;
+  height: 50px;
+  background: #2691d9;
+  border-radius: 25px;
+  font-size: 18px;
+  color: #e9f4fb;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: 0.5s;
+  border: none;
+}
+input[type="submit"]:hover {
+  border-color: #2691d9;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #2980b9;
+  height: 100vh;
+}
+</style>
+
+
+@model LoginViewModel
+@if (TempData["LoginError"] is not null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["LoginError"]
+    </div>
+}
+
+<div class="center">
+    <h1>Login</h1>
+    <form method="post">
+        <div class="txt_field">
+            <input type="text" asp-for="@Model.Email" required />
+            <span></span>
+            <label>E-mail</label>
+        </div>
+        <div class="txt_field">
+            <input type="password" asp-for="@Model.Password" required />
+            <span></span>
+            <label>Password</label>
+        </div>
+        <div class="pass">Forgot Password?</div>
+        <input type="submit" value="Login" />
+        <div class="signup_link">Not a member? <a asp-action="Register">Signup</a></div>
+    </form>
+</div>

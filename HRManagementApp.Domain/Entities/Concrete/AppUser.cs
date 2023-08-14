@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Domain.Entities.Concrete
 {
-    public class AppUser : IdentityUser<Guid>, IBaseEntity
+    public class AppUser : IdentityUser<Guid>,IBaseEntity
     {
         //IBaseEntity Interface
         public DateTime CreatedDate { get; set; }
@@ -17,5 +17,6 @@ namespace HRManagementApp.Domain.Entities.Concrete
         public DateTime? ModifiedDate { get; set; }
         public string? ModifiedBy { get; set; }
         public Status Status { get; set; }
+
     }
 }

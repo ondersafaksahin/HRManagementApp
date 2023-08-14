@@ -26,6 +26,7 @@ namespace HRManagementApp.Infrastructure.Repositories
         public async Task Add(T item)
         {
             await _table.AddAsync(item);
+            await Save();
         }
 
         public async Task<bool> Any(Expression<Func<T, bool>> expression)

@@ -12,7 +12,7 @@ namespace HRManagementApp.Infrastructure.Mapping
     {
         public override void Configure(EntityTypeBuilder<Admin> builder)
         {
-            builder.HasKey(x => x.ID);
+            builder.HasKey(x => x.Id);
             base.Configure(builder);
         }
     }
