@@ -32,7 +32,7 @@ namespace HRManagementApp.Application.DTOs.CompanyDTOs
         public string ContactName { get; set; }
         public string? ContactTitle { get; set; }
         public virtual List<Employee>? Employees { get; set; }
-        public virtual Manager Manager { get; set; }
+        public virtual Employee? Manager { get; set; }
         public Guid ManagerID { get; set; }
         public virtual Package? Package { get; set; }
         public int? PackageID { get; set; }

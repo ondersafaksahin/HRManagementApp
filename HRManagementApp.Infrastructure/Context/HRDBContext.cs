@@ -23,14 +23,18 @@ namespace HRManagementApp.Infrastructure.Context
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<Package> Packages { get; set; }
         public DbSet<Shift> Shifts { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Admin>().ToTable("Admins");
+            builder.Entity<Employee>().ToTable("Employees");
             builder.ApplyConfiguration(new AdvancePaymentMapping());
             builder.ApplyConfiguration(new CompanyMapping());
             builder.ApplyConfiguration(new ExpenseMapping());
             builder.ApplyConfiguration(new LeaveMapping());
-            builder.ApplyConfiguration(new ManagerMapping());
             builder.ApplyConfiguration(new PackageMapping());
             builder.ApplyConfiguration(new ShiftMapping());
             builder.Seed(this);

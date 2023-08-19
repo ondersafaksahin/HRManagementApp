@@ -28,7 +28,7 @@ namespace HRManagementApp.Domain.Entities.Concrete
         public string? Title { get; set; }
         public string? TaxNumber { get; set; }
         public string? TaxAdministration { get; set; }
-        public string Email { get; set; }
+        public string? Email { get; set; }
         public int? EmployeeCount { get; set; }
         public int? YearOfFoundation { get; set; }
         public DateTime? ContractStartDate { get; set; }
@@ -36,15 +36,16 @@ namespace HRManagementApp.Domain.Entities.Concrete
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public string? City { get; set; }
-        public string ContactName { get; set; }
+        public string? ContactName { get; set; }
         public string? ContactTitle { get; set; }
 
 
         //Navigation Properties
+        public virtual List<Shift>? Shifts { get; set; }
         public virtual List<Employee>? Employees { get; set; }
-        public virtual List<Manager>? Managers { get; set; }
+        public virtual Employee? Manager { get; set; }
+        public Guid ManagerID { get; set; }
         public virtual Package? Package { get; set; }
         public int? PackageID { get; set; }
-        public virtual List<Shift>? Shifts{ get; set; }
     }
 }

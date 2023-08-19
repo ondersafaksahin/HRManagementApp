@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace HRManagementApp.Domain.Entities.Concrete
 {
-    public class Employee: AppUser, IUserEntity
-    {
-        //Navigation Properties
-        
+    public class Employee: AppUser
+    {  
         public byte[]? Picture { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
