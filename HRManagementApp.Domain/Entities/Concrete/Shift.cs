@@ -31,6 +31,6 @@ namespace HRManagementApp.Domain.Entities.Concrete
         //Navigation Properties
         public virtual Company Company { get; set; }
         public Guid CompanyID { get; set; }
-        public virtual List<Employee> Employees { get; set; }
+        public virtual List<Employee>? Employees { get; set; }
     }
 }

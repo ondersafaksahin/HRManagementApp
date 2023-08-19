@@ -25,7 +25,7 @@ namespace HRManagementApp.Application.DTOs.CompanyDTOs
         public string? City { get; set; }
         public string ContactName { get; set; }
         public string? ContactTitle { get; set; }
-        public virtual Manager Manager { get; set; }
+        public virtual Employee? Manager { get; set; }
         public Guid ManagerID { get; set; }
         public virtual Package? Package { get; set; }
         public int? PackageID { get; set; }

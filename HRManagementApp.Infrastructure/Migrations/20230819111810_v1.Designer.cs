@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagementApp.Infrastructure.Migrations
 {
     [DbContext(typeof(HRDBContext))]
-    [Migration("20230814111742_v1")]
+    [Migration("20230819111810_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -57,9 +57,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                     b.Property<Guid>("EmployeeID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ManagerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Maturity")
                         .HasColumnType("int");
 
@@ -81,8 +78,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeID");
-
-                    b.HasIndex("ManagerId");
 
                     b.ToTable("AdvancePayments");
                 });
@@ -135,25 +130,25 @@ namespace HRManagementApp.Infrastructure.Migrations
                         {
                             Id = new Guid("6ee57077-8be1-4991-850d-fcb5a6960473"),
                             CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2023, 8, 14, 14, 17, 42, 378, DateTimeKind.Local).AddTicks(3958),
+                            CreatedDate = new DateTime(2023, 8, 19, 14, 18, 9, 754, DateTimeKind.Local).AddTicks(8369),
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             Status = 0
                         },
                         new
                         {
-                            Id = new Guid("37d5b9f1-de8d-42c0-b9e0-6eefa5196a94"),
+                            Id = new Guid("143d3dff-6ea1-48da-b160-d2e2c4e4e3ed"),
                             CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2023, 8, 14, 14, 17, 42, 378, DateTimeKind.Local).AddTicks(3989),
+                            CreatedDate = new DateTime(2023, 8, 19, 14, 18, 9, 754, DateTimeKind.Local).AddTicks(8402),
                             Name = "Manager",
                             NormalizedName = "MANAGER",
                             Status = 0
                         },
                         new
                         {
-                            Id = new Guid("b18fd03e-1cd8-4ecd-b4c3-c45ea3f5825f"),
+                            Id = new Guid("e04570ee-3959-45dd-a1dd-a45302d2b493"),
                             CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2023, 8, 14, 14, 17, 42, 378, DateTimeKind.Local).AddTicks(3992),
+                            CreatedDate = new DateTime(2023, 8, 19, 14, 18, 9, 754, DateTimeKind.Local).AddTicks(8405),
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE",
                             Status = 0
@@ -179,10 +174,6 @@ namespace HRManagementApp.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -224,9 +215,7 @@ namespace HRManagementApp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -247,29 +236,7 @@ namespace HRManagementApp.Infrastructure.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
-
-                    b.UseTphMappingStrategy();
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("0031c609-4d45-4c50-bbee-278e9dd5ed73"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "caa4b2d9-7d1b-419f-a2e5-04866cccdec2",
-                            CreatedBy = "Admin",
-                            CreatedDate = new DateTime(2023, 8, 14, 14, 17, 42, 378, DateTimeKind.Local).AddTicks(4081),
-                            Email = "admin@hrmanagementapp.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMİN@HRMANAGEMENTAPP.COM",
-                            NormalizedUserName = "ADMİN@HRMANAGEMENTAPP.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGfqcVz7geBa0TK9Dp0bTQVC1Kv/ceuAKJCc6GDm5Wyet5Z28GEPyjYMmS9aNHNOSw==",
-                            PhoneNumberConfirmed = false,
-                            Status = 0,
-                            TwoFactorEnabled = false,
-                            UserName = "admin@hrmanagementapp.com"
-                        });
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Company", b =>
@@ -289,7 +256,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactTitle")
@@ -309,7 +275,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("EmployeeCount")
@@ -317,6 +282,9 @@ namespace HRManagementApp.Infrastructure.Migrations
 
                     b.Property<byte[]>("Logo")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<Guid>("ManagerID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -348,6 +316,9 @@ namespace HRManagementApp.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ManagerID")
+                        .IsUnique();
 
                     b.HasIndex("PackageID");
 
@@ -392,9 +363,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                     b.Property<int>("ExpenseType")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ManagerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -413,8 +381,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeID");
-
-                    b.HasIndex("ManagerId");
 
                     b.ToTable("Expenses");
                 });
@@ -450,9 +416,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                     b.Property<int>("LeaveType")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ManagerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -474,8 +437,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeID");
-
-                    b.HasIndex("ManagerId");
 
                     b.ToTable("Leaves");
                 });
@@ -543,7 +504,7 @@ namespace HRManagementApp.Infrastructure.Migrations
                             DurationDays = 30,
                             PackageName = "Standart",
                             Price = 10m,
-                            ReleaseDate = new DateTime(2023, 8, 14, 14, 17, 42, 477, DateTimeKind.Local).AddTicks(1081),
+                            ReleaseDate = new DateTime(2023, 8, 19, 14, 18, 9, 830, DateTimeKind.Local).AddTicks(5712),
                             Status = 0
                         },
                         new
@@ -555,7 +516,7 @@ namespace HRManagementApp.Infrastructure.Migrations
                             DurationDays = 30,
                             PackageName = "Business",
                             Price = 20m,
-                            ReleaseDate = new DateTime(2023, 8, 14, 14, 17, 42, 477, DateTimeKind.Local).AddTicks(1103),
+                            ReleaseDate = new DateTime(2023, 8, 19, 14, 18, 9, 830, DateTimeKind.Local).AddTicks(5730),
                             Status = 0
                         },
                         new
@@ -567,7 +528,7 @@ namespace HRManagementApp.Infrastructure.Migrations
                             DurationDays = 30,
                             PackageName = "Premium",
                             Price = 30m,
-                            ReleaseDate = new DateTime(2023, 8, 14, 14, 17, 42, 477, DateTimeKind.Local).AddTicks(1106),
+                            ReleaseDate = new DateTime(2023, 8, 19, 14, 18, 9, 830, DateTimeKind.Local).AddTicks(5733),
                             Status = 0
                         });
                 });
@@ -727,6 +688,42 @@ namespace HRManagementApp.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Admin", b =>
+                {
+                    b.HasBaseType("HRManagementApp.Domain.Entities.Concrete.AppUser");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
+
+                    b.ToTable("Admins", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0031c609-4d45-4c50-bbee-278e9dd5ed73"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1c8acf1d-8d82-4290-b9a4-6fc7baa8f709",
+                            CreatedBy = "Admin",
+                            CreatedDate = new DateTime(2023, 8, 19, 14, 18, 9, 754, DateTimeKind.Local).AddTicks(8476),
+                            Email = "admin@hrmanagementapp.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMİN@HRMANAGEMENTAPP.COM",
+                            NormalizedUserName = "ADMİN@HRMANAGEMENTAPP.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMzb/vVVUaiEp7rUJxN5kIa8XOArMxkQVTuYdNg1z7pBvoaZlLlayOQpcZASQ+1rEA==",
+                            PhoneNumberConfirmed = false,
+                            Status = 0,
+                            TwoFactorEnabled = false,
+                            UserName = "admin@hrmanagementapp.com"
+                        });
+                });
+
             modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Employee", b =>
                 {
                     b.HasBaseType("HRManagementApp.Domain.Entities.Concrete.AppUser");
@@ -779,107 +776,7 @@ namespace HRManagementApp.Infrastructure.Migrations
 
                     b.HasIndex("ShiftID");
 
-                    b.HasDiscriminator().HasValue("Employee");
-                });
-
-            modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Manager", b =>
-                {
-                    b.HasBaseType("HRManagementApp.Domain.Entities.Concrete.AppUser");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("BirthPlace")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("CompanyID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Department")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("HireDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Job")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LeaveDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NationalID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Picture")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("ShiftID")
-                        .HasColumnType("int");
-
-                    b.HasIndex("CompanyID");
-
-                    b.HasIndex("ShiftID");
-
-                    b.ToTable("AspNetUsers", t =>
-                        {
-                            t.Property("Address")
-                                .HasColumnName("Manager_Address");
-
-                            t.Property("BirthDate")
-                                .HasColumnName("Manager_BirthDate");
-
-                            t.Property("BirthPlace")
-                                .HasColumnName("Manager_BirthPlace");
-
-                            t.Property("CompanyID")
-                                .HasColumnName("Manager_CompanyID");
-
-                            t.Property("Department")
-                                .HasColumnName("Manager_Department");
-
-                            t.Property("FirstName")
-                                .HasColumnName("Manager_FirstName");
-
-                            t.Property("HireDate")
-                                .HasColumnName("Manager_HireDate");
-
-                            t.Property("Job")
-                                .HasColumnName("Manager_Job");
-
-                            t.Property("LastName")
-                                .HasColumnName("Manager_LastName");
-
-                            t.Property("LeaveDate")
-                                .HasColumnName("Manager_LeaveDate");
-
-                            t.Property("NationalID")
-                                .HasColumnName("Manager_NationalID");
-
-                            t.Property("Picture")
-                                .HasColumnName("Manager_Picture");
-
-                            t.Property("Salary")
-                                .HasColumnName("Manager_Salary");
-
-                            t.Property("ShiftID")
-                                .HasColumnName("Manager_ShiftID");
-                        });
-
-                    b.HasDiscriminator().HasValue("Manager");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.AdvancePayment", b =>
@@ -890,18 +787,22 @@ namespace HRManagementApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Manager", null)
-                        .WithMany("AdvancePayments")
-                        .HasForeignKey("ManagerId");
-
                     b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Company", b =>
                 {
+                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Employee", "Manager")
+                        .WithOne("Company")
+                        .HasForeignKey("HRManagementApp.Domain.Entities.Concrete.Company", "ManagerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HRManagementApp.Domain.Entities.Concrete.Package", "Package")
                         .WithMany("Companies")
                         .HasForeignKey("PackageID");
+
+                    b.Navigation("Manager");
 
                     b.Navigation("Package");
                 });
@@ -914,10 +815,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Manager", null)
-                        .WithMany("Expenses")
-                        .HasForeignKey("ManagerId");
-
                     b.Navigation("Employee");
                 });
 
@@ -928,10 +825,6 @@ namespace HRManagementApp.Infrastructure.Migrations
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Manager", null)
-                        .WithMany("Leaves")
-                        .HasForeignKey("ManagerId");
 
                     b.Navigation("Employee");
                 });
@@ -998,32 +891,30 @@ namespace HRManagementApp.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Employee", b =>
+            modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Admin", b =>
                 {
-                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Company", "Company")
-                        .WithMany("Employees")
-                        .HasForeignKey("CompanyID");
-
-                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Shift", "Shift")
-                        .WithMany("Employees")
-                        .HasForeignKey("ShiftID");
-
-                    b.Navigation("Company");
-
-                    b.Navigation("Shift");
+                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.AppUser", null)
+                        .WithOne()
+                        .HasForeignKey("HRManagementApp.Domain.Entities.Concrete.Admin", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Manager", b =>
+            modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Employee", b =>
                 {
-                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Company", "Company")
-                        .WithMany("Managers")
+                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Company", null)
+                        .WithMany("Employees")
                         .HasForeignKey("CompanyID");
 
-                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Shift", "Shift")
-                        .WithMany()
-                        .HasForeignKey("ShiftID");
+                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.AppUser", null)
+                        .WithOne()
+                        .HasForeignKey("HRManagementApp.Domain.Entities.Concrete.Employee", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Company");
+                    b.HasOne("HRManagementApp.Domain.Entities.Concrete.Shift", "Shift")
+                        .WithMany("Employees")
+                        .HasForeignKey("ShiftID");
 
                     b.Navigation("Shift");
                 });
@@ -1031,8 +922,6 @@ namespace HRManagementApp.Infrastructure.Migrations
             modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Company", b =>
                 {
                     b.Navigation("Employees");
-
-                    b.Navigation("Managers");
 
                     b.Navigation("Shifts");
                 });
@@ -1051,14 +940,7 @@ namespace HRManagementApp.Infrastructure.Migrations
                 {
                     b.Navigation("AdvancePayments");
 
-                    b.Navigation("Expenses");
-
-                    b.Navigation("Leaves");
-                });
-
-            modelBuilder.Entity("HRManagementApp.Domain.Entities.Concrete.Manager", b =>
-                {
-                    b.Navigation("AdvancePayments");
+                    b.Navigation("Company");
 
                     b.Navigation("Expenses");
 

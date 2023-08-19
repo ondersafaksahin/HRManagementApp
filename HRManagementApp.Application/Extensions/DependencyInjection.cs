@@ -6,7 +6,6 @@ using HRManagementApp.Application.Services.CompanyService;
 using HRManagementApp.Application.Services.EmployeeService;
 using HRManagementApp.Application.Services.ExpenseService;
 using HRManagementApp.Application.Services.LeaveService;
-using HRManagementApp.Application.Services.ManagerService;
 using HRManagementApp.Application.Services.PackageService;
 using HRManagementApp.Application.Services.ShiftService;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +28,6 @@ namespace HRManagementApp.Application.Extensions
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IExpenseService, ExpenseService>();
             services.AddScoped<ILeaveService, LeaveService>();
-            services.AddScoped<IManagerService, ManagerService>();
             services.AddScoped<IPackageService, PackageService>();
             services.AddScoped<IShiftService, ShiftService>();
 
